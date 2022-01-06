@@ -2268,48 +2268,8 @@ div.fancybox .image-caption:empty {
     border-radius: 8px;
   }
 }
-.highlight {
-  position: relative;
-}
-.btn-copy {
-  z-index: 1;
-  display: inline-block;
-  cursor: pointer;
-  border: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
-  -webkit-appearance: none;
-  font-family: Menlo, Menlo, UbuntuMono, Monaco, monospace, courier, sans-serif;
-  font-size: 11px;
-  font-weight: bold;
-  padding: 4px 8px;
-  color: var(--color-meta);
-  background: var(--color-card);
-  border-radius: 3px;
-  box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1);
-  position: absolute;
-  top: 1px;
-  right: 1px;
-  opacity: 0;
-  transition: all 0.28s ease;
-  -moz-transition: all 0.28s ease;
-  -webkit-transition: all 0.28s ease;
-  -o-transition: all 0.28s ease;
-}
-.btn-copy >i {
-  margin-right: 4px;
-}
-.btn-copy:hover {
-  color: #ff5722;
-  background: #ffeee8;
-}
-.highlight:hover .btn-copy {
-  opacity: 1;
-}
-.article pre:hover .btn-copy {
-  opacity: 1;
+.l_header .aplayer-volume-wrap {
+  display: none !important;
 }
 p,
 input,
@@ -2751,7 +2711,7 @@ article#tag .all-tags ul li span:before {
   color: rgba(68,68,68,0.9);
 }
 .article code {
-  font-family: Menlo, UbuntuMono, Monaco, monospace, courier, sans-serif;
+  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
 }
 .article code:not([class]) {
   word-break: break-all;
@@ -3571,6 +3531,7 @@ article#comments p[ct] {
   margin-bottom: 1em;
   font-size: 1.125rem;
   color: var(--color-text);
+  font-weight: 600;
 }
 article#comments p[cst] {
   margin-top: 1em;
@@ -4446,9 +4407,10 @@ img.lazyload:not(.placeholder).loaded {
 }
 .snackbar-content .action a {
   margin: 4px;
+  cursor: pointer;
   color: #fff;
   display: inline-block;
-  padding: 0.8em 2em;
+  padding: 0.4em 2em;
   font-weight: 600;
   border-radius: 2px;
   border: 1px solid #fff;
