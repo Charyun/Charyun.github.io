@@ -239,6 +239,22 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             
           
           
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/dreams/
+                  
+                  
+                  
+                    id="dreams"
+                  >
+                  <i class='fas fa-gift fa-fw'></i>梦想图册
+                </a>
+                
+              </li>
+            
+          
+          
 				</ul>
 			</div>
 
@@ -360,6 +376,22 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
                   <i class='fas fa-moon fa-fw'></i>黑色主题
                 </a>
               <li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/dreams/
+                  
+                  
+                  
+                    id="dreams"
+                  >
+                  <i class='fas fa-gift fa-fw'></i>梦想图册
+                </a>
+                
+              </li>
             
           
             
@@ -595,7 +627,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://charypro.github.io/2020/01/16/%E5%BC%80%E5%8F%91/Linux/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/&title=Linux进程间通信 - CHARY | 哈哈哈哈哈&summary="
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://charyun.github.io/2020/01/16/%E5%BC%80%E5%8F%91/Linux/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/&title=Linux进程间通信 - CHARY | 哈哈哈哈哈&summary="
           
           >
           
@@ -607,7 +639,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://charypro.github.io/2020/01/16/%E5%BC%80%E5%8F%91/Linux/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/&title=Linux进程间通信 - CHARY | 哈哈哈哈哈&summary="
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://charyun.github.io/2020/01/16/%E5%BC%80%E5%8F%91/Linux/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/&title=Linux进程间通信 - CHARY | 哈哈哈哈哈&summary="
           
           >
           
@@ -619,7 +651,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://service.weibo.com/share/share.php?url=http://charypro.github.io/2020/01/16/%E5%BC%80%E5%8F%91/Linux/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/&title=Linux进程间通信 - CHARY | 哈哈哈哈哈&summary="
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://charyun.github.io/2020/01/16/%E5%BC%80%E5%8F%91/Linux/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/&title=Linux进程间通信 - CHARY | 哈哈哈哈哈&summary="
           
           >
           
@@ -1264,7 +1296,7 @@ function setSearchService() {
       // 请求 PV 并自增
       var pvCtn = document.querySelector('#lc-sv');
       if (pvCtn || enableIncr) {
-        var pvGetter = this.getRecord(Counter, 'http://CharyPro.github.io' + '/#lc-sv', 'Visits').then((record) => {
+        var pvGetter = this.getRecord(Counter, 'http://Charyun.github.io' + '/#lc-sv', 'Visits').then((record) => {
           incrArr.push(this.buildIncrement(record.objectId))
           var eles = document.querySelectorAll('#lc-sv #number');
           if (eles.length > 0) {
@@ -1282,7 +1314,7 @@ function setSearchService() {
       // 请求 UV 并自增
       var uvCtn = document.querySelector('#lc-uv');
       if (uvCtn || enableIncr) {
-        var uvGetter = this.getRecord(Counter, 'http://CharyPro.github.io' + '/#lc-uv', 'Visitors').then((record) => {
+        var uvGetter = this.getRecord(Counter, 'http://Charyun.github.io' + '/#lc-uv', 'Visitors').then((record) => {
           var vuv = this.validUV();
           vuv && incrArr.push(this.buildIncrement(record.objectId))
           var eles = document.querySelectorAll('#lc-uv #number');
@@ -1304,7 +1336,7 @@ function setSearchService() {
         for (i = 0; i < allPV.length; i++) {
           let pv = allPV[i];
           let title = pv.getAttribute('data-title');
-          var url = 'http://CharyPro.github.io' + pv.getAttribute('data-path');
+          var url = 'http://Charyun.github.io' + pv.getAttribute('data-path');
           if (url) {
             var viewGetter = this.getRecord(Counter, url, title).then((record) => {
               // 是当前页面就自增
@@ -1643,9 +1675,9 @@ document.addEventListener("pjax:success", listennSidebarTOC);
   <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
   <script data-pjax>
         function GithubCalendarConfig(){
-            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?charypro";
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?Charyun";
             var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
-            var git_user ="charypro";
+            var git_user ="Charyun";
             var parent_div_git = document.getElementsByClassName('l_main')[0];
             var git_div_html = '<div class="post post-v3 white-box reveal shadow" style="width:100%;height:auto;padding:10px;transform: none!important;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
             if(parent_div_git && location.pathname =='/'){
