@@ -700,7 +700,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <h4 id="二维矩阵加法"><a href="#二维矩阵加法" class="headerlink" title="二维矩阵加法"></a>二维矩阵加法</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__global__ <span class="keyword">void</span> <span class="title">sumMatrix</span><span class="params">(<span class="keyword">float</span> * MatA,<span class="keyword">float</span> * MatB,<span class="keyword">float</span> * MatC,<span class="keyword">int</span> nx,<span class="keyword">int</span> ny)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ix=threadIdx.x+blockDim.x*blockIdx.x;</span><br><span class="line">    <span class="keyword">int</span> iy=threadIdx.y+blockDim.y*blockIdx.y;</span><br><span class="line">    <span class="keyword">int</span> idx=ix+iy*ny;</span><br><span class="line">    <span class="keyword">if</span> (ix&lt;nx &amp;&amp; iy&lt;ny)</span><br><span class="line">    &#123;</span><br><span class="line">      MatC[idx]=MatA[idx]+MatB[idx];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>分别使用CPU、二维网格和二维块 、一维网格和一维块和二维网格和一维块均得到正确的结果，但消耗的时间如下图</p>
-<p><img src="https://raw.githubusercontent.com/charypro/CloudImage/main/imgs/image-20211021215129518.png" class="lazyload" data-srcset="https://raw.githubusercontent.com/charypro/CloudImage/main/imgs/image-20211021215129518.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211021215129518"></p>
+<p><img src="https://raw.githubusercontent.com/Charyun/CloudImage/main/imgs/image-20211021215129518.png" class="lazyload" data-srcset="https://raw.githubusercontent.com/Charyun/CloudImage/main/imgs/image-20211021215129518.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211021215129518"></p>
 <ul>
 <li>改变执行配置（线程组织）能得到不同的性能</li>
 <li>传统的核函数可能不能得到最好的效果</li>
@@ -892,6 +892,16 @@ CUDA的学习（更新）
 
   
     <div class="prev-next">
+      
+        <a class='prev' href='/2022/03/01/%E5%BC%80%E5%8F%91/QT/Qt%E5%85%83%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Qt元对象系统</p>
+          <p class='content'>本篇文章内容：
+
+Qt元对象系统的介绍及练习
+
+
+Qt元对象系统介绍反射机制反射机制是指在运行时，能获取任意一个类对象的所有类型信息、属性、成员函数等信息的一种机制。元对象系统提供的功能之一是在...</p>
+        </a>
       
       
         <a class='next' href='/2021/08/22/%E5%BC%80%E5%8F%91/%E5%85%B6%E5%AE%83/Airsim%E5%AE%89%E8%A3%85/'>

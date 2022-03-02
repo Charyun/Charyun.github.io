@@ -22,15 +22,15 @@
 
   <!-- 页面元数据 -->
   
-  <title>关于理财的基本认识 - CHARY | 哈哈哈哈哈</title>
+  <title>Qt元对象系统 - CHARY | 哈哈哈哈哈</title>
   
-    <meta name="keywords" content="理财">
+    <meta name="keywords" content="C++,QT">
   
 
   
     <meta name="description" content="本篇文章内容：
 
-关于理财的基本认识（更新）
+Qt元对象系统的介绍及练习
 ">
   
 
@@ -496,7 +496,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
       <h1 class="title">
-        关于理财的基本认识
+        Qt元对象系统
       </h1>
       <div class='new-meta-box'>
         
@@ -516,7 +516,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div class='new-meta-item category'>
     <a class='notlink'>
       <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <a class="category-link" href="/categories/%E7%90%86%E8%B4%A2/">理财</a>
+      <a class="category-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a><span class="sep"></span><a class="category-link" href="/categories/%E5%BC%80%E5%8F%91/QT/">QT</a>
     </a>
   </div>
 
@@ -527,7 +527,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2021年5月22日</p>
+    <p>发布于：2022年3月1日</p>
   </a>
 </div>
 
@@ -538,7 +538,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div class="new-meta-item browse leancloud">
     <a class='notlink'>
       
-      <div id="lc-pv" data-title="关于理财的基本认识" data-path="/2021/05/22/%E6%8A%95%E8%B5%84/%E7%90%86%E8%B4%A2%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">
+      <div id="lc-pv" data-title="Qt元对象系统" data-path="/2022/03/01/%E5%BC%80%E5%8F%91/QT/Qt%E5%85%83%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F/">
         <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
         <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
         次浏览
@@ -558,11 +558,56 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
   <p>本篇文章内容：</p>
 <ul>
-<li>关于理财的基本认识（更新）</li>
+<li>Qt元对象系统的介绍及练习</li>
 </ul>
 <a id="more"></a>
+<h2 id="Qt元对象系统介绍"><a href="#Qt元对象系统介绍" class="headerlink" title="Qt元对象系统介绍"></a>Qt元对象系统介绍</h2><h2 id="反射机制"><a href="#反射机制" class="headerlink" title="反射机制"></a>反射机制</h2><p>反射机制是指在运行时，能获取任意一个类对象的所有类型信息、属性、成员函数等信息的一种机制。元对象系统提供的功能之一是在运行阶段，程序可以获取 QObject 派生类对象所属类的名称、父类名称、该对象的成员函数、枚举类型、数据成员等信息</p>
+<blockquote>
+<p>不是从 QObject 派生的类对象，则无法使用 Qt 的元对象系统来获取这些信息</p>
+</blockquote>
+<div class="note red"><p>元对象，是指用于描述另一个对象结构的对象</p></div>
 
-<h2 id="理财基本知识"><a href="#理财基本知识" class="headerlink" title="理财基本知识"></a>理财基本知识</h2><p><img src="https://raw.githubusercontent.com/Charyun/CloudImage/main/imgs/%E7%90%86%E8%B4%A2%E7%9F%A5%E8%AF%86%E4%B8%80.png" class="lazyload" data-srcset="https://raw.githubusercontent.com/Charyun/CloudImage/main/imgs/%E7%90%86%E8%B4%A2%E7%9F%A5%E8%AF%86%E4%B8%80.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="理财知识一"></p>
+<h3 id="使用-Qt-反射机制的条件"><a href="#使用-Qt-反射机制的条件" class="headerlink" title="使用 Qt 反射机制的条件"></a>使用 Qt 反射机制的条件</h3><ul>
+<li>需要继承自 <code>QObject</code> 类，并需要在类之中加入 <code>Q_OBJECT</code> 宏。</li>
+<li>注册成员函数：若希望普通成员函数能够被反射，需要在函数声明之前加入 <code>QObject::Q_INVOKABLE</code> 宏。</li>
+<li>注册成员变量：若希望成员变量能被反射，需要使用 <code>Q_PROPERTY</code> 宏</li>
+</ul>
+<h2 id="使用反射机制获取类对象的成员函数的信息："><a href="#使用反射机制获取类对象的成员函数的信息：" class="headerlink" title="使用反射机制获取类对象的成员函数的信息："></a>使用反射机制获取类对象的成员函数的信息：</h2><details red><summary> 点击查看代码 </summary>
+              <div class='content'>
+              <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QObject&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> :</span> <span class="keyword">public</span> QObject &#123;</span><br><span class="line">    Q_OBJECT                <span class="comment">//启动元对象系统，必须声明此宏</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">Q_INVOKABLE <span class="title">A</span><span class="params">()</span></span>&#123;&#125;       <span class="comment">//要想函数被反射，需要指定 Q_INVOKABLE 宏</span></span><br><span class="line">    <span class="function">Q_INVOKABLE <span class="title">A</span><span class="params">(<span class="keyword">int</span>)</span></span>&#123;&#125;</span><br><span class="line">    <span class="function">Q_INVOKABLE <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="function">Q_INVOKABLE <span class="keyword">void</span> <span class="title">g</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">float</span> j)</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">g1</span><span class="params">()</span></span>&#123;&#125;             <span class="comment">//注意：此函数不会被反射</span></span><br><span class="line">signals:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">gb3</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> :</span> <span class="keyword">public</span> A &#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">Q_INVOKABLE <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">signals:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">gb4</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">gb5</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QCoreApplication <span class="title">a</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    A ma;</span><br><span class="line">    B mb;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> QMetaObject* pa = ma.metaObject();</span><br><span class="line">    <span class="keyword">const</span> QMetaObject* pb = mb.metaObject();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> j = pa-&gt;methodCount();  <span class="comment">//返回对象ma中的成员函数个数</span></span><br><span class="line">                                <span class="comment">//包括从父类QObject继承而来的5个成员函数及本对象中的2个成员函数(不包括g1)</span></span><br><span class="line">                                <span class="comment">//及1个信号，所以总数为8</span></span><br><span class="line"></span><br><span class="line">    qDebug() &lt;&lt; <span class="string">&quot;j = &quot;</span> &lt;&lt; j;    <span class="comment">// 8</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> i = pa-&gt;indexOfMethod(<span class="string">&quot;g(int,float)&quot;</span>); <span class="comment">//获取对象 ma 中的成员函数 g 的索引号</span></span><br><span class="line">    qDebug() &lt;&lt; <span class="string">&quot;i = &quot;</span> &lt;&lt; i;    <span class="comment">// 7</span></span><br><span class="line">    i = pa-&gt;constructorCount(); <span class="comment">//获取对象 ma 所属类中的构造函数的数量</span></span><br><span class="line">    qDebug() &lt;&lt; <span class="string">&quot;i = &quot;</span> &lt;&lt; i;    <span class="comment">// 2</span></span><br><span class="line">    i = pb-&gt;constructorCount(); <span class="comment">//获取对象 mb 所属类中的构造函数的数量,因类B无构造函数，所以返回值为 0</span></span><br><span class="line">    qDebug() &lt;&lt; <span class="string">&quot;i = &quot;</span> &lt;&lt; i;    <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line">    i = pa-&gt;indexOfConstructor(<span class="string">&quot;A(int)&quot;</span>);   <span class="comment">//获取对象 ma 所属类中的构造函数 A(int)的索引号</span></span><br><span class="line">    qDebug() &lt;&lt; <span class="string">&quot;i = &quot;</span> &lt;&lt; i;    <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line">    i = pa-&gt;indexOfSignal(<span class="string">&quot;f()&quot;</span>); <span class="comment">//获取对象ma的信号f()的索引号。因为成员函数f存在，但不是信号，所以返回值为-1</span></span><br><span class="line">    qDebug() &lt;&lt; <span class="string">&quot;i = &quot;</span> &lt;&lt; i;    <span class="comment">// -1</span></span><br><span class="line"></span><br><span class="line">    i = pb-&gt;methodOffset();     <span class="comment">//获取父类的成员函数数量，包括父类A及QObject中的成员函数，总共为8</span></span><br><span class="line">    qDebug() &lt;&lt; <span class="string">&quot;i = &quot;</span> &lt;&lt; i;    <span class="comment">// 8</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用 QMetaMethod</span></span><br><span class="line">    QMetaMethod m = pa-&gt;method(pa-&gt;indexOfMethod(<span class="string">&quot;g(int,float)&quot;</span>));<span class="comment">//函数前面不能包含空格</span></span><br><span class="line">    QByteArray s = m.name();    <span class="comment">//获取函数g的函数名</span></span><br><span class="line">    qDebug() &lt;&lt; <span class="string">&quot;s:&quot;</span> &lt;&lt; s.data();   <span class="comment">//g</span></span><br><span class="line"></span><br><span class="line">    s = m.methodSignature();    <span class="comment">//获取函数g的签名</span></span><br><span class="line">    qDebug() &lt;&lt; <span class="string">&quot;s:&quot;</span> &lt;&lt; s.data();   <span class="comment">//g(int,float)</span></span><br><span class="line"></span><br><span class="line">    i = m.methodType();         <span class="comment">//获取函数g的类型，此处返回的是 QMetaMethod::MethodType中定义的枚举值</span></span><br><span class="line">                                <span class="comment">//其中 Method=0，表示类型为成员函数</span></span><br><span class="line">    qDebug() &lt;&lt; <span class="string">&quot;i = &quot;</span> &lt;&lt; i;    <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回值</span></span><br><span class="line">    s = m.typeName();           <span class="comment">//获取函数g的返回值类型名</span></span><br><span class="line">    qDebug() &lt;&lt; <span class="string">&quot;s:&quot;</span> &lt;&lt; s.data();   <span class="comment">//void</span></span><br><span class="line"></span><br><span class="line">    i = m.returnType();         <span class="comment">//获取函数g的返回值类型，此处的类型是 QMetaType 中定义的枚举值</span></span><br><span class="line">                                <span class="comment">//其中枚举值QMetaType::void = 43</span></span><br><span class="line">    qDebug() &lt;&lt; <span class="string">&quot;i = &quot;</span> &lt;&lt; i;    <span class="comment">// 43</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//参数</span></span><br><span class="line">    i = m.parameterType(<span class="number">1</span>);     <span class="comment">//获取函数 g 中索引号为 1 的参数类型，此处的类型是 QMetaType 中定义的</span></span><br><span class="line">                                <span class="comment">//枚举值，其中枚举值 QMetaType::float=38</span></span><br><span class="line">    qDebug() &lt;&lt; <span class="string">&quot;i = &quot;</span> &lt;&lt; i;    <span class="comment">// 38</span></span><br><span class="line"></span><br><span class="line">    QList&lt;QByteArray&gt; q = m.parameterNames();   <span class="comment">//获取函数 g 的参数名列表</span></span><br><span class="line">    qDebug() &lt;&lt; q[<span class="number">0</span>].data() &lt;&lt; q[<span class="number">1</span>].data();     <span class="comment">//输出i j</span></span><br><span class="line"></span><br><span class="line">    q = m.parameterTypes();     <span class="comment">//获取函数g的参数类型列表</span></span><br><span class="line">    qDebug() &lt;&lt; q[<span class="number">0</span>].data() &lt;&lt; q[<span class="number">1</span>].data();     <span class="comment">//输出int float</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> a.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+              </div>
+            </details>
+
+<h2 id="使用反射机制获取与类相关的信息"><a href="#使用反射机制获取与类相关的信息" class="headerlink" title="使用反射机制获取与类相关的信息"></a>使用反射机制获取与类相关的信息</h2><p><code>inherits</code>: 判断继承关系</p>
+<details red><summary> 点击查看代码 </summary>
+              <div class='content'>
+              <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> :</span> <span class="keyword">public</span> QObject &#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> :</span> <span class="keyword">public</span> A &#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> :</span> <span class="keyword">public</span> QObject &#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span> :</span> <span class="keyword">public</span> C &#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QCoreApplication <span class="title">a</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    A ma; B mb; C mc; D md;</span><br><span class="line">    <span class="keyword">const</span> QMetaObject *pa = ma.metaObject();</span><br><span class="line">    <span class="keyword">const</span> QMetaObject *pb = mb.metaObject();</span><br><span class="line"></span><br><span class="line">    qDebug() &lt;&lt; pa-&gt;className();    <span class="comment">//输出类名</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//使用 QMetaObject::inherits()函数判断继承关系</span></span><br><span class="line">    qDebug() &lt;&lt; pa-&gt;inherits(pa);   <span class="comment">//输出true，类被认为是自身的子类</span></span><br><span class="line">    qDebug() &lt;&lt; pa-&gt;inherits(pb);   <span class="comment">//输出false</span></span><br><span class="line">    qDebug() &lt;&lt; pb-&gt;inherits(pa);   <span class="comment">//输出true，B继承自A</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//使用 QObject::inherits()函数判断继承关系</span></span><br><span class="line">    qDebug() &lt;&lt; ma.inherits(<span class="string">&quot;A&quot;</span>);   <span class="comment">//输出 true，类被认为是自身的子类</span></span><br><span class="line">    qDebug() &lt;&lt; ma.inherits(<span class="string">&quot;B&quot;</span>);   <span class="comment">//输出 false，类A不是类B的子类</span></span><br><span class="line"></span><br><span class="line">    qDebug() &lt;&lt; md.inherits(<span class="string">&quot;C&quot;</span>);   <span class="comment">//输出 true，虽然类D未启动元对象系统，但类C已启动，此种情形下能正确判断继承关系。</span></span><br><span class="line">    qDebug() &lt;&lt; md.inherits(<span class="string">&quot;D&quot;</span>);   <span class="comment">//输出 false，因为类 D 未启动元对象系统</span></span><br><span class="line"></span><br><span class="line">    qDebug() &lt;&lt; md.metaObject()-&gt;className(); <span class="comment">//输出 C，此处未输出 D，因为类 D 未启动元对象系统，</span></span><br><span class="line">                                              <span class="comment">//与类 D 最接近的启动了元对象系统的父类是 C，因此返回 C</span></span><br><span class="line">    <span class="keyword">return</span> a.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+              </div>
+            </details>
+
+<h3 id="qobject-cast的使用"><a href="#qobject-cast的使用" class="headerlink" title="qobject_cast的使用"></a>qobject_cast的使用</h3><p><code>qobject_cast</code> 仅适用于 QObject 及其派生类</p>
+<details red><summary> 点击查看代码 </summary>
+              <div class='content'>
+              <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> :</span> <span class="keyword">public</span> QObject &#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">fa</span><span class="params">()</span> </span>&#123; <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;FA&quot;</span>&lt;&lt;<span class="built_in">endl</span>;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> :</span> <span class="keyword">public</span> A &#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">fb</span><span class="params">()</span></span>&#123;<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;FB&quot;</span>&lt;&lt;<span class="built_in">endl</span>;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> :</span> <span class="keyword">public</span> QObject &#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">fc</span><span class="params">()</span> </span>&#123;<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;FC&quot;</span>&lt;&lt;<span class="built_in">endl</span>;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span> :</span> <span class="keyword">public</span> C &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">fd</span><span class="params">()</span></span>&#123;<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;FD&quot;</span>&lt;&lt;<span class="built_in">endl</span>;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">g</span><span class="params">(QObject *p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(qobject_cast&lt;A*&gt;(p))<span class="comment">//若 p 是类 A 及其派生类类型</span></span><br><span class="line">        qDebug() &lt;&lt; <span class="string">&quot;GA&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span>(qobject_cast&lt;B*&gt;(p))<span class="comment">//若 p 是类 B 及其派生类类型</span></span><br><span class="line">        qDebug() &lt;&lt; <span class="string">&quot;GB&quot;</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        qDebug() &lt;&lt; <span class="string">&quot;XX&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QCoreApplication <span class="title">a</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    A *pa = <span class="keyword">new</span> A;</span><br><span class="line">    B *pb = <span class="keyword">new</span> B;</span><br><span class="line">    C *pc = <span class="keyword">new</span> C;</span><br><span class="line">    D *pd = <span class="keyword">new</span> D;</span><br><span class="line"></span><br><span class="line">    qobject_cast&lt;B*&gt;(pa)-&gt;fb(); <span class="comment">//输出FB,由于A继承自B,所以A类对象可以转换成B类</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//qobject_cast&lt;D*&gt;(pc);       //错误，因为类 D 未使用 Q_OBJECT 宏。</span></span><br><span class="line"></span><br><span class="line">    g(pa); <span class="comment">//输出 GA、XX。因为 pa 不是 B 及其派生类类型所以会输出 XX。</span></span><br><span class="line">    g(pb); <span class="comment">//输出 GA、GB。因为 pb 是 A 的派生类类型，所以首先输出 GA，然后输出 GB。</span></span><br><span class="line">    g(pc); <span class="comment">//输出 XX，因为 pc 即不是 A 也不是 B 及其派生类的类型，所以输出 XX</span></span><br><span class="line">    g(pd); <span class="comment">//输出 XX，原因同上</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> a.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+              </div>
+            </details>
+
+<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><p>Q_PROPERTY(type name (READ getFunction [WRITE setFunction] | MEMBER memberName [(READ getFunction | WRITE setFunction)]) …. )</p>
+<ul>
+<li>属性可以与成员变量和成员函数进行关联</li>
+<li>属性可以使用 QObject::property 和 QObject::setProperty 函数进行存取</li>
+</ul>
+<details red><summary> 点击查看代码 </summary>
+              <div class='content'>
+              <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> :</span> <span class="keyword">public</span> QObject &#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"><span class="keyword">public</span>: <span class="comment">/*通常，若属性名为 a，则相应的读取函数通常命名为 geta，设置函数命名为 seta，本例并未使用这种命名规则*/</span></span><br><span class="line">    <span class="comment">//声明一个类型为 int，名称为 a 的属性，并使用函数 f 读取属性值，使用函数 g 设置属性值。</span></span><br><span class="line">    Q_PROPERTY(<span class="keyword">int</span> a READ f WRITE g)</span><br><span class="line">    <span class="comment">//声明一个类型为 int，名称为 b 的属性，并把该属性与成员变量 m_b 相关联，该属性未设置存取函数。</span></span><br><span class="line">    Q_PROPERTY(<span class="keyword">int</span> b MEMBER m_b)</span><br><span class="line">    <span class="comment">//声明一个只读属性 c，本例没有设置该属性值的函数，因此该属性是只读的。</span></span><br><span class="line">    Q_PROPERTY(<span class="keyword">int</span> c READ getc)</span><br><span class="line">    <span class="comment">/*在存取函数中可把属性与成员变量相关联，方法如下所示。对存取函数的返回类型和参数类型及数量在本例影响不大，在后文会讲解其影响。*/</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">()</span></span>&#123; <span class="keyword">return</span> m_a; &#125; <span class="comment">//属性 a 的读取函数。</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">g</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;m_a=i;&#125; <span class="comment">//属性 a 的设置函数。</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getc</span><span class="params">()</span></span>&#123;m_c=<span class="number">3</span>; <span class="keyword">return</span> m_c;&#125; <span class="comment">/*成员变量也可以不与属性相关联，本函数也可直接返回数值 3。</span></span><br><span class="line"><span class="comment">    从此处可看到，属性可以不与数据成员相关联。*/</span></span><br><span class="line">    <span class="keyword">int</span> m_a,m_b; <span class="comment">//属性若命名为 a，则与其相对应的成员变量习惯上应命名为 m_a。</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> m_c;</span><br><span class="line">&#125;;<span class="comment">//成员变量通常都应声明为私有的，这样可提高程序的封装性。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    A ma;</span><br><span class="line">    <span class="comment">//像普通成员变量一样存取属性值</span></span><br><span class="line">    ma.m_a=<span class="number">1</span>;</span><br><span class="line">    qDebug() &lt;&lt;ma.m_a; <span class="comment">//输出 1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//因为属性 b 没有存取函数，本例暂时只使用普通成员变量的方式存取该属性值</span></span><br><span class="line">    ma.m_b = <span class="number">2</span>;</span><br><span class="line">    qDebug() &lt;&lt; ma.m_b; <span class="comment">//输出 2</span></span><br><span class="line">    ma.g(<span class="number">4</span>);            <span class="comment">//使用属性 a 的设置函数修改属性值</span></span><br><span class="line">    qDebug() &lt;&lt; ma.f(); <span class="comment">// 输出 4，使用属性 a 的读取函数读取属性值</span></span><br><span class="line">    qDebug() &lt;&lt; ma.getc();  <span class="comment">//输出 3，属性 c 是只读的，只能通过他的读取函数访问其值</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+              </div>
+            </details>
+
+<h2 id="动态属性"><a href="#动态属性" class="headerlink" title="动态属性"></a>动态属性</h2><p>若属性 name 未使用 Q_PROPERTY 进行声明，则把该属性和值作为新属性添加到对象中，并返回 false，这就是动态属性。动态属性是添加到某个类的对象中的，<br>而不是添加到 QMetaObject 中的，这意味着，无法使用 QMetaObject 的成员函数获取<br>动态属性的信息</p>
+<p><code>property</code> 和  <code>setProperty</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mz.property(<span class="string">&quot;MMM&quot;</span>);<span class="comment">//正确，因为属性 MMM 不存在,返回的是一个空的 QVariant 对象</span></span><br><span class="line">QVariant v;</span><br><span class="line">mz.setProperty(<span class="string">&quot;b&quot;</span>,v); <span class="comment">// 正确设置属性 b 的值的方法，把属性 b 的值设置为 v 中存储的值</span></span><br><span class="line">mz.property(<span class="string">&quot;b&quot;</span>).typeName() <span class="comment">// 输出属性 b 的类型</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="使用反射机制获取属性的信息"><a href="#使用反射机制获取属性的信息" class="headerlink" title="使用反射机制获取属性的信息"></a>使用反射机制获取属性的信息</h2><p><code>QMetaProperty</code>:用于描述对象的属性，可使用该类的成员函数获取对象属性的信息</p>
 
   
   
@@ -582,10 +627,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-22T00:00:00+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-03-01T00:00:00+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2021年5月22日</p>
+    <p>更新于：2022年3月1日</p>
   </a>
 </div>
 
@@ -594,7 +639,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E7%90%86%E8%B4%A2/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>理财</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/C/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>C++</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/QT/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>QT</p></a></div>
 
 
         
@@ -607,9 +652,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://charyun.github.io/2021/05/22/%E6%8A%95%E8%B5%84/%E7%90%86%E8%B4%A2%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/&title=关于理财的基本认识 - CHARY | 哈哈哈哈哈&summary=本篇文章内容：
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://charyun.github.io/2022/03/01/%E5%BC%80%E5%8F%91/QT/Qt%E5%85%83%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F/&title=Qt元对象系统 - CHARY | 哈哈哈哈哈&summary=本篇文章内容：
 
-关于理财的基本认识（更新）
+Qt元对象系统的介绍及练习
 "
           
           >
@@ -622,9 +667,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://charyun.github.io/2021/05/22/%E6%8A%95%E8%B5%84/%E7%90%86%E8%B4%A2%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/&title=关于理财的基本认识 - CHARY | 哈哈哈哈哈&summary=本篇文章内容：
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://charyun.github.io/2022/03/01/%E5%BC%80%E5%8F%91/QT/Qt%E5%85%83%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F/&title=Qt元对象系统 - CHARY | 哈哈哈哈哈&summary=本篇文章内容：
 
-关于理财的基本认识（更新）
+Qt元对象系统的介绍及练习
 "
           
           >
@@ -637,9 +682,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://service.weibo.com/share/share.php?url=http://charyun.github.io/2021/05/22/%E6%8A%95%E8%B5%84/%E7%90%86%E8%B4%A2%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/&title=关于理财的基本认识 - CHARY | 哈哈哈哈哈&summary=本篇文章内容：
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://charyun.github.io/2022/03/01/%E5%BC%80%E5%8F%91/QT/Qt%E5%85%83%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F/&title=Qt元对象系统 - CHARY | 哈哈哈哈哈&summary=本篇文章内容：
 
-关于理财的基本认识（更新）
+Qt元对象系统的介绍及练习
 "
           
           >
@@ -670,33 +715,17 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <div class="prev-next">
       
-        <a class='prev' href='/2021/06/22/%E5%BC%80%E5%8F%91/QT/QT%E4%B8%80%E4%BA%9B%E5%B0%8F%E7%9F%A5%E8%AF%86/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Qt 的一些小知识（更新）</p>
+      
+        <a class='next' href='/2021/11/22/%E5%BC%80%E5%8F%91/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%E7%BC%96%E7%A8%8B%E5%8F%8A%E4%BC%98%E5%8C%96/CUDA%E5%AD%A6%E4%B9%A0/'>
+          <p class='title'>CUDA的学习<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
           <p class='content'>本篇文章内容：
 
-Qt 的一些小知识
+CUDA的学习（更新）
 
 
 
-
-
-Q_D的设置意在方便地获取私有类指针，文件为 qglobal.h
-1#define Q_D(Class) Class##Private * con...</p>
-        </a>
-      
-      
-        <a class='next' href='/2021/01/24/%E5%BC%80%E5%8F%91/AI/Pytorch%E5%9F%BA%E7%A1%80%E5%86%85%E5%AE%B9/'>
-          <p class='title'>Pytorch 简单的介绍<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>本篇文章内容：
-
-Pytorch 的四个常用的重要的模块
-Pytorch 中张量的基础知识
-
-
-
-
-
-Pytorch的主要模块Pytorch中最重要的四个模块：torch.nn，torch.op...</p>
+CUDA的一段简单的代码如下：
+12345678910111213141516/**hello_world.cu*/#include&lt;std...</p>
         </a>
       
     </div>
@@ -710,59 +739,6 @@ Pytorch的主要模块Pytorch中最重要的四个模块：torch.nn，torch.op..
 
 
 
-
-
-  <script>
-  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.0/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    // 文章章节标题不能为 “MathJax” ，否则会报错。
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
 
 
 
@@ -789,7 +765,7 @@ Pytorch的主要模块Pytorch中最重要的四个模块：torch.nn，torch.op..
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%90%86%E8%B4%A2%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86"><span class="toc-text">理财基本知识</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Qt%E5%85%83%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D"><span class="toc-text">Qt元对象系统介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6"><span class="toc-text">反射机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-Qt-%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E7%9A%84%E6%9D%A1%E4%BB%B6"><span class="toc-text">使用 Qt 反射机制的条件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E8%8E%B7%E5%8F%96%E7%B1%BB%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E4%BF%A1%E6%81%AF%EF%BC%9A"><span class="toc-text">使用反射机制获取类对象的成员函数的信息：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E8%8E%B7%E5%8F%96%E4%B8%8E%E7%B1%BB%E7%9B%B8%E5%85%B3%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="toc-text">使用反射机制获取与类相关的信息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#qobject-cast%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">qobject_cast的使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7"><span class="toc-text">属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E5%B1%9E%E6%80%A7"><span class="toc-text">动态属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E8%8E%B7%E5%8F%96%E5%B1%9E%E6%80%A7%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="toc-text">使用反射机制获取属性的信息</span></a></li></ol>
     </div>
   </section>
 
@@ -810,7 +786,7 @@ Pytorch的主要模块Pytorch中最重要的四个模块：torch.nn，torch.op..
 <script>
   window.pdata={}
   pdata.ispage=true;
-  pdata.postTitle="关于理财的基本认识";
+  pdata.postTitle="Qt元对象系统";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要
