@@ -22,11 +22,16 @@
 
   <!-- 页面元数据 -->
   
-  <title>Makefile的编写 - CHARY | 哈哈哈哈哈</title>
+  <title>Qt元对象系统 - CHARY | 哈哈哈哈哈</title>
+  
+    <meta name="keywords" content="C++,QT">
   
 
   
-    <meta name="description" content="Makefile编程">
+    <meta name="description" content="本篇文章内容：
+
+Qt元对象系统的介绍及练习
+">
   
 
   <!-- feed -->
@@ -491,7 +496,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
       <h1 class="title">
-        Makefile的编写
+        Qt元对象系统
       </h1>
       <div class='new-meta-box'>
         
@@ -511,7 +516,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div class='new-meta-item category'>
     <a class='notlink'>
       <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <a class="category-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a><span class="sep"></span><a class="category-link" href="/categories/%E5%BC%80%E5%8F%91/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/">Linux系统编程</a>
+      <a class="category-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a><span class="sep"></span><a class="category-link" href="/categories/%E5%BC%80%E5%8F%91/QT/">QT</a>
     </a>
   </div>
 
@@ -522,7 +527,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2020年3月13日</p>
+    <p>发布于：2022年3月1日</p>
   </a>
 </div>
 
@@ -533,7 +538,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div class="new-meta-item browse leancloud">
     <a class='notlink'>
       
-      <div id="lc-pv" data-title="Makefile的编写" data-path="/2020/03/13/%E5%BC%80%E5%8F%91/Linux/Makefile/">
+      <div id="lc-pv" data-title="Qt元对象系统" data-path="/2022/03/01/%E5%BC%80%E5%8F%91/QT/Qt%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A7%BD/">
         <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
         <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
         次浏览
@@ -551,22 +556,51 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <p><strong>Makefile编程</strong></p>
+  <p>本篇文章内容：</p>
+<ul>
+<li>Qt元对象系统的介绍及练习</li>
+</ul>
 <a id="more"></a>
-
-<h3 id="引用其它的-Makefile"><a href="#引用其它的-Makefile" class="headerlink" title="引用其它的 Makefile"></a>引用其它的 Makefile</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include foo.make *.mk $(bar)</span><br></pre></td></tr></table></figure>
-<p>如果文件都没有指定绝对路径或是相对路径的话， make 会在当前目录下首先寻找，如果当前目录下没有找到，那么， make 还会在下面的几个目录下找：</p>
+<h2 id="Qt-信号与槽"><a href="#Qt-信号与槽" class="headerlink" title="Qt 信号与槽"></a>Qt 信号与槽</h2><p>信号和槽其实是观察者模式的一种实现</p>
+<ul>
+<li>槽的参数的类型需要与信号参数的类型相对应</li>
+<li>槽的参数不能多余信号的参数，因为若槽的参数更多，则多余的参数不能接收到信号传递过来的值，若在槽中使用了这些多余的无值的参数，就会产生错误</li>
+<li>若信号的参数多余槽的参数，则多余的参数将被忽略</li>
+<li>一个信号可以与多个槽关联，多个信号也可以与同一个槽关联，信号也可以关联到另一个信号上</li>
+<li>若一个信号关联到多个槽时，则发射信号时，槽函数按照关联的顺序依次执行。</li>
+<li>若信号连接到另一个信号，则当第一个信号发射时，会立即发射第二个信号</li>
+</ul>
+<p>##对象树</p>
+<p>GUI 程序通常是存在父子关系的。当关闭对话框时，父对象依据子对象列表，找到每个子对象，然后删除它们。在 Qt 中，对对象的管理，使用的是树形结构，也就是对象树。</p>
+<p>对象删除规则</p>
+<ul>
+<li><p>父对象会自动删除子对象。父对象拥有对象的所有权，在父对象被删除时会在析构函数中自动删除其子对象。</p>
+</li>
+<li><p>当手动删除子对象时，会把该子对象从父对象的列表中移除，以避<br>免父对象被删除时该子对象被再次删除。总之 QObject 对象不会被删除两次</p>
+</li>
+<li><p>子对象通常应创建在堆中(使用 new 创建)，此时就不再需要使用 delete 将其删除了，当父对象被删除时，会自动删除该子对象</p>
+</li>
+<li><p>对于 Qt 程序，父对象通常创建在栈上，不应创建在堆上(使用 new 创建)</p>
+</li>
+<li><p>子对象不应创建在栈中，因为若父对象比子对象更早的结束生命期(即父对象创建于子对象之后)，则子对象会被删除两次，第一次发生在父对象生命期结束时，由 Qt 对象树的规则，使用父对象删除子对象，第二次发生在子对象生命期结束时，由 C++规则删除子对象。（可使用先创建父对象后创建子对象的方法解决）</p>
+</li>
+</ul>
+<p>应确保每一个 QObject 对象在 QApplication 之后创建，在 QApplication 销毁之前销毁，因此 QObject 对象不能是 static 存储类型的，因为 static 对象将在 main()返回之后才被销毁，其销毁时间太迟了</p>
+<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>Qt 可以使用以下 5 种方式来处理事件：</p>
 <ol>
-<li>如果 make 执行时，有“-I”或“–include-dir”参数，那么 make 就会在这个参数所指定的目录下去寻找。</li>
-<li>如果目录&lt;prefix&gt;/include（一般是： /usr/local/bin 或/usr/include）存在的话， make 也会去找。</li>
+<li>重新实现各部件内部默认的事件处理函数，比如重新实现 paintEvent()、mousePressEvent()等事件处理函数</li>
+<li>重新实现 QObject::event()函数(需继承 QObject 类)，使用该方式，可以在事件到达默认的事件处理函数之前捕获到该事件</li>
+<li>在 QObject 对象上安装(或称为注册)事件过滤器 installEventFilter</li>
+<li>在 QApplication 上安装(或称为注册)事件过滤器</li>
+<li>子类化 QApplication，并重新实现 QCoreApplication::notify()函数</li>
+<li>注意：exec()、notify()和 event()函数都不会处理事件，他们只是根据事件的类型进行事件的传递</li>
 </ol>
-<p>想让 make 不理那些无法读取的文件，而继续执行，你可以在 include 前加一个减号“-”. <code>-include &lt;filename&gt;</code></p>
-<h3 id="make-的工作方式"><a href="#make-的工作方式" class="headerlink" title="make 的工作方式"></a>make 的工作方式</h3><p>1、读入所有的 Makefile。<br>2、读入被 include 的其它 Makefile。<br>3、初始化文件中的变量。<br>4、推导隐晦规则，并分析所有规则。<br>5、为所有的目标文件创建依赖关系链。<br>6、根据依赖关系，决定哪些目标要重新生成。<br>7、执行生成命令</p>
-<h4 id="文件搜寻"><a href="#文件搜寻" class="headerlink" title="文件搜寻"></a>文件搜寻</h4><p>如果没有指明这个变量， make 只会在当前的目录中去找寻依赖文件和目标文件。如果定义了这个变量，那么， make 就会在当当前目录找不到的情况下，到所指定的目录中去找寻文件了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VPATH &#x3D; src:..&#x2F;headers</span><br></pre></td></tr></table></figure>
-<p>上面的的定义指定两个目录，“src”和“../headers”， make 会按照这个顺序进行搜索。目录由“冒号”分隔。</p>
-<h3 id="伪目标"><a href="#伪目标" class="headerlink" title="伪目标"></a>伪目标</h3><p>“伪目标”并不是一个文件，只是一个标签，由于“伪目标”不是文件，所以 make 无法生成它的依赖关系和决定它是否要执行。我们只有通过显示地指明这个“目标”才能让其生效。为了避免和文件重名的这种情况，我们可以使用一个特殊的标记“.PHONY”来显示地指明一个目标是“伪目标”，向 make 说明，不管是否有这个文件，这个目标就是“伪目标”。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.PHONY: clean</span><br><span class="line">clean:</span><br><span class="line">rm *.o temp</span><br></pre></td></tr></table></figure>
+<p>使用 QEvent::accept()函数表示接受一个事件，使用 QEvent::ignore()函数表示忽略一个事件。也就是说若调用 accept()，则事件不会传递给父对象，若调用 ignore()则事件会向父对象传递<br>在 event()函数中调用 accept()或 ignore()是没有意义的，event()函数通过返回一个 bool 值来告诉调用者是否接受了事件(true 表示接受事件)。返回 0 只表示该事件可<br>以传递给父对象处理，返回 1 则事件不再传递</p>
+<p>理解事件过滤器<br> 观察者模式：其原理为，设有一目标对象 S，它有多个观察该对象的对象 G1，G2，G3， 当S 发生变化时，S 的观察者会依情形改变自身。应用于 Qt 事件过滤器，则是，首先使用 S 的成员函数 installEventFilter 函数把 G1，G2，G3 设置为 S 的观察者，所有本应传递给 S 的事件 E，则先传递给观察者 G1，G2，G3，然后观察者调用其成员函数 eventFilter<br>对传递进来的事件进行处理，若 eventFilter 返回 true 表示事件处理完毕，返回 false 则返回给被观察者 S 进行处理。</p>
+<p>当安装了多个事件过滤器之后，eventFilter 函数返回 0 并不会使事件返回给目标对象，而是传递给下一个过滤器对象，当所有过滤器对象都不处理该事件时才会传递给目标对象。传递的顺序与注册是相反，即逆序</p>
+<p>event()函数、事件过滤器、和事件处理函数的调用顺序如下：<br>首先按逆序调用事件过滤器，然后调用 event()函数，最后调用事件处理函数(注意：事件处理函数需在 event()函数中明确或间接调用，否则不会调用事件处理函数)。</p>
+<p>只有在按下鼠标按钮(左、右、中键都可)时才会发生鼠标移动事件(即QEvent::MouseMove)，使用 QWidget::setMouseTracking（）函数启用鼠标跟踪后，就即使不按下鼠标按钮也会产生鼠标移动事件</p>
+
   
   
     
@@ -585,10 +619,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-03-13T00:00:00+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-03-01T00:00:00+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2020年3月13日</p>
+    <p>更新于：2022年3月1日</p>
   </a>
 </div>
 
@@ -596,6 +630,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         
           
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/C/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>C++</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/QT/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>QT</p></a></div>
+
 
         
       
@@ -607,7 +644,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://charyun.github.io/2020/03/13/%E5%BC%80%E5%8F%91/Linux/Makefile/&title=Makefile的编写 - CHARY | 哈哈哈哈哈&summary=Makefile编程"
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://charyun.github.io/2022/03/01/%E5%BC%80%E5%8F%91/QT/Qt%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A7%BD/&title=Qt元对象系统 - CHARY | 哈哈哈哈哈&summary=本篇文章内容：
+
+Qt元对象系统的介绍及练习
+"
           
           >
           
@@ -619,7 +659,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://charyun.github.io/2020/03/13/%E5%BC%80%E5%8F%91/Linux/Makefile/&title=Makefile的编写 - CHARY | 哈哈哈哈哈&summary=Makefile编程"
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://charyun.github.io/2022/03/01/%E5%BC%80%E5%8F%91/QT/Qt%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A7%BD/&title=Qt元对象系统 - CHARY | 哈哈哈哈哈&summary=本篇文章内容：
+
+Qt元对象系统的介绍及练习
+"
           
           >
           
@@ -631,7 +674,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://service.weibo.com/share/share.php?url=http://charyun.github.io/2020/03/13/%E5%BC%80%E5%8F%91/Linux/Makefile/&title=Makefile的编写 - CHARY | 哈哈哈哈哈&summary=Makefile编程"
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://charyun.github.io/2022/03/01/%E5%BC%80%E5%8F%91/QT/Qt%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A7%BD/&title=Qt元对象系统 - CHARY | 哈哈哈哈哈&summary=本篇文章内容：
+
+Qt元对象系统的介绍及练习
+"
           
           >
           
@@ -661,23 +707,23 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <div class="prev-next">
       
-        <a class='prev' href='/2020/03/13/%E5%BC%80%E5%8F%91/Linux/Shell%E7%AC%94%E8%AE%B0/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>linux Shell</p>
-          <p class='content'>linux Shell编程
+        <a class='prev' href='/2022/03/09/%E5%BC%80%E5%8F%91/%E5%85%B6%E5%AE%83/git%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>git的常见使用方法</p>
+          <p class='content'>
 
-
-变量的使用123456your_name=&quot;qinjx&quot;echo $your_nameecho $&#123;your_name&#125;r...</p>
+常用命令设置用户名和邮箱
+项目级别：12git config user.name &quot;name&quot;git config user.email &quot;email&quot...</p>
         </a>
       
       
-        <a class='next' href='/2020/02/27/%E5%BC%80%E5%8F%91/C++/Window%E4%B8%8A%E5%9F%BA%E4%BA%8EQT%E7%9A%84FFmpeg%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/'>
-          <p class='title'>Window上基于QT的FFmpeg环境搭建<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>Window上基于QT的FFmpeg环境搭建
+        <a class='next' href='/2022/03/01/%E5%BC%80%E5%8F%91/QT/Qt%E5%85%83%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F/'>
+          <p class='title'>Qt元对象系统<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>本篇文章内容：
+
+Qt元对象系统的介绍及练习
 
 
-FFmpeg的下载和安装
-Windows下载地址，选择电脑对应的32位或64位的Shared和Dev版本进行下载
-将下载后的压缩包解压后，把其中...</p>
+Qt元对象系统介绍反射机制反射机制是指在运行时，能获取任意一个类对象的所有类型信息、属性、成员函数等信息的一种机制。元对象系统提供的功能之一是在...</p>
         </a>
       
     </div>
@@ -717,7 +763,7 @@ Windows下载地址，选择电脑对应的32位或64位的Shared和Dev版本进
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E5%85%B6%E5%AE%83%E7%9A%84-Makefile"><span class="toc-text">引用其它的 Makefile</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#make-%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%96%B9%E5%BC%8F"><span class="toc-text">make 的工作方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%90%9C%E5%AF%BB"><span class="toc-text">文件搜寻</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AA%E7%9B%AE%E6%A0%87"><span class="toc-text">伪目标</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Qt-%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A7%BD"><span class="toc-text">Qt 信号与槽</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6"><span class="toc-text">事件</span></a></li></ol>
     </div>
   </section>
 
@@ -738,7 +784,7 @@ Windows下载地址，选择电脑对应的32位或64位的Shared和Dev版本进
 <script>
   window.pdata={}
   pdata.ispage=true;
-  pdata.postTitle="Makefile的编写";
+  pdata.postTitle="Qt元对象系统";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要
