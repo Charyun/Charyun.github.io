@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta http-equiv='x-dns-prefetch-control' content='on' />
@@ -24,9 +22,13 @@
 
   <!-- 页面元数据 -->
   
-  <title>归档：2020 - CHARY | 哈哈哈哈哈</title>
+  <title>Qt部分控件和布局的介绍 - CHARY | 哈哈哈哈哈</title>
+  
+    <meta name="keywords" content="QT">
   
 
+  
+    <meta name="description" content="Qt的部分控件和布局的介绍">
   
 
   <!-- feed -->
@@ -106,7 +108,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <body>
     
 
-<header id="l_header" class="l_header auto shadow blur show" style='opacity: 0' >
+<header id="l_header" class="l_header auto shadow blur " style='opacity: 0' >
   <div class='container'>
   <div id='wrapper'>
     <div class='nav-sub'>
@@ -409,7 +411,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <div id="l_cover">
   
     
-        <div id="full" class='cover-wrapper  search' style="display: none;">
+        <div id="half" class='cover-wrapper post search' style="display: ;">
           
             <div id='cover-backstretch'></div>
           
@@ -481,521 +483,270 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           
 
 <div class='l_main'>
-	
-		
-  <section class="post-list">
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow blur">
+  <article class="article post white-box reveal md shadow blur article-type-post" id="post" itemscope itemprop="blogPost">
   
+
+
   
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/03/13/%E5%BC%80%E5%8F%91/Linux/Makefile/">
-        Makefile的编写
+    <div class='headimg-div'>
+      <a class='headimg-a'>
+        <img class='headimg' src='https://gitee.com/Chari/cloud-image/raw/master/imgs/chengzi.PNG'/>
       </a>
-    </h2>
+    </div>
   
-  <div class='md'>
+  <div class="article-meta" id="top">
     
-      <p><strong>Makefile编程</strong></p>
     
+    
+      <h1 class="title">
+        Qt部分控件和布局的介绍
+      </h1>
+      <div class='new-meta-box'>
+        
+          
+            
+<div class='new-meta-item author'>
+  <a class='author' href="/" rel="nofollow">
+    <img no-lazy src="/assets/logo/xiaote_logo.jpeg">
+    <p>Chary</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class='new-meta-item category'>
+    <a class='notlink'>
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <a class="category-link" href="/categories/%E5%BC%80%E5%8F%91%EF%BC%8CQT/">开发，QT</a>
+    </a>
   </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
+
+
+          
         
-        <time>2020-03-13</time>
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2022年3月9日</p>
+  </a>
+</div>
+
+          
         
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a><span class="sep"></span><a class="category-link" href="/categories/%E5%BC%80%E5%8F%91/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/">Linux系统编程</a>
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="Qt部分控件和布局的介绍" data-path="/2022/03/09/%E5%BC%80%E5%8F%91/QT/QtPushButtonGroup/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
         
       </div>
+    
+  </div>
+
+
+  
+  
+  <a id="more"></a>
+
+<h2 id="容器部件"><a href="#容器部件" class="headerlink" title="容器部件"></a>容器部件</h2><h3 id="QDialogButtonBox"><a href="#QDialogButtonBox" class="headerlink" title="QDialogButtonBox"></a>QDialogButtonBox</h3><ul>
+<li>当把按钮添加到由该类创建的按钮框之中时，按钮会被自动布局，不需要手动设置按钮的大小和位置。</li>
+<li>QDialogButtonBox 类还提供了一些信号</li>
+</ul>
+<p>向按钮框中添加按钮的方法：</p>
+<ol>
+<li>在创建 QDialogButtonBox 类对象时的构造函数中直接指定由 Qt 设计好的内置的标准按钮</li>
+<li>创建自定义的按钮，然后使用 QDialogButtonBox::addButton()函数把该按钮添加到按钮框中，并指定其作用</li>
+</ol>
+<p>按钮框中的按钮是根据按钮的 Role(作用或角色)而进行布局的，而且还会因系统的不同而不同</p>
+<h3 id="QGroupBox"><a href="#QGroupBox" class="headerlink" title="QGroupBox"></a>QGroupBox</h3><p>提供了一个顶部带有标题的箱形框架，然后在该框架中可以显示其<br>他部件，组框的主要作用是把各部件组织在一起，以方便管理</p>
+<h3 id="QLabel"><a href="#QLabel" class="headerlink" title="QLabel"></a>QLabel</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">QLabel *pb=<span class="keyword">new</span> QLabel(<span class="string">&quot;&lt;a href=http://aaa&gt;AAAA bbbb cccc dddd eeee ffff gggg kkkk&lt;/a&gt;&quot;</span>,&amp;w);</span><br><span class="line"></span><br><span class="line"><span class="comment">//设置标签边框样式，以使其看起来比较明显</span></span><br><span class="line">pb-&gt;setFrameStyle(QFrame::Box|QFrame::Raised); pb-&gt;setLineWidth(<span class="number">5</span>);</span><br><span class="line">pb-&gt;move(<span class="number">22</span>,<span class="number">22</span>); pb-&gt;resize(<span class="number">155</span>,<span class="number">86</span>); <span class="comment">//设置标签位置及大小</span></span><br><span class="line">pb-&gt;setMargin(<span class="number">15</span>); <span class="comment">//设置页边距为 15</span></span><br><span class="line">pb-&gt;setIndent(<span class="number">14</span>); <span class="comment">//设置缩进量为 14(本例相对于左侧边缘，因为是左对齐的)</span></span><br><span class="line">pb-&gt;setWordWrap(<span class="literal">true</span>); <span class="comment">//设置文本在合适位置自动换行</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="布局管理器"><a href="#布局管理器" class="headerlink" title="布局管理器"></a>布局管理器</h3><p>Qt 使用布局管理器的步骤为，</p>
+<ol>
+<li>首先创建一个布局管理器类的对象</li>
+<li>然后使用该布局管理器类中的 addWidget()函数，把需要由布局管理器管理的部件添加进来。还可使用 addLayout()函数把其他布局管理器添加进来。</li>
+<li>最后使用 QWidget::setLayout()函数为窗口设置布局管理器。</li>
+</ol>
+<p>说明：</p>
+<ul>
+<li>若为布局指定了父部件，则可以不使用 QWidget::setLayout()函数，反之，调用<br>QWidget::setLayout()函数安装布局，则可以不为该布局指定父部件。</li>
+<li><em>不需要为添加到布局中的部件指定父部件</em>，布局中的部件会自动成为安装布局的部件的子部件(使用 QWidget::setParent())。注意：子部件的父部件不是布局，而是安装布局的部件。</li>
+</ul>
+<p>例程如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">QWidget w;</span><br><span class="line"><span class="comment">//以下按钮会添加到布局中，所以都未设置父部件。</span></span><br><span class="line">QPushButton *pb1=<span class="keyword">new</span> QPushButton(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">QPushButton *pb2=<span class="keyword">new</span> QPushButton(<span class="string">&quot;3&quot;</span>);</span><br><span class="line">QPushButton *pb3=<span class="keyword">new</span> QPushButton(<span class="string">&quot;4&quot;</span>);</span><br><span class="line">QHBoxLayout *ph= <span class="keyword">new</span> QHBoxLayout; <span class="comment">/*未指定父部件，因为使用了 setLayout 函数，该布局</span></span><br><span class="line"><span class="comment">是按水平方向排列的部件*/</span></span><br><span class="line">ph-&gt;addWidget(pb1); <span class="comment">//把按钮添加到布局中</span></span><br><span class="line">ph-&gt;addWidget(pb2);</span><br><span class="line">ph-&gt;addWidget(pb3);</span><br><span class="line">w.setLayout(ph); <span class="comment">//为窗口 w 安装布局</span></span><br><span class="line">w.show();</span><br></pre></td></tr></table></figure>
+
+<h4 id="部件拉伸-Stretch-原理及大小策略"><a href="#部件拉伸-Stretch-原理及大小策略" class="headerlink" title="部件拉伸(Stretch)原理及大小策略"></a>部件拉伸(Stretch)原理及大小策略</h4><ol>
+<li>拉伸因子：描述了各个部件在进行拉伸时，多个部件之间应以怎样的比例进行拉伸，比如把按钮 1、按钮 2、按钮 3 的拉伸因子分别为设置为 1，2，3，则按钮将按 1：2： 3 的大小进行拉伸以填满整个布局空间(见下图)</li>
+<li>大小策略：大小策略规定了部件以何种方式进行拉伸及压缩，比如部件不能被拉伸或压缩，部件不能被压缩得比大小提示更小等。(提示的意思是 Qt 的建议或推荐)</li>
+<li>部件的大小限制：限制了部件可以被拉伸或压缩的范围，比如比如不能把部件压缩得比最小大小更小，或不能拉伸得比最大大小更大等</li>
+</ol>
+<p>QSizePolicy类是一个描述布局水平和垂直方向调整策略的属性</p>
+<p>大小约束是用来改变主窗口最大最小大小的，主窗口的最大最小大小决定了主窗口是<br>否可进行拉伸或压缩，而子部件(比如本例的按钮)是否可被拉伸和压缩是由各子部件<br>的大小策略决定的，因此大小约束和大小策略一个决定主窗口是否可拉伸压缩，一个<br>决定了子部件是否可拉伸压缩。</p>
+<p>系统计算主窗口的最大最小大小时会根据子部件的大小策略进行计算，比如本例的子<br>部件在垂直方向的大小策略为 Fixed(即固定不变)，则主窗口依此计算出来的在垂直方<br>向的最大和最小高度始终为 45，而水平方向各子部件的大小策略是 Expanding(可拉伸)，<br>因此主窗口在水平方向计算出来的最大大小可以为 524287</p>
+<h3 id="内容边距-ContentsMargins-、间距-spacing-和-QSpacerItem-类"><a href="#内容边距-ContentsMargins-、间距-spacing-和-QSpacerItem-类" class="headerlink" title="内容边距(ContentsMargins)、间距(spacing)和 QSpacerItem 类"></a>内容边距(ContentsMargins)、间距(spacing)和 QSpacerItem 类</h3><p>内容边距：就是页边距，指的是布局中的各子部件(内容)与周围四个边的距离<br>间距 spacing：指的是各部件之间的距离<br>QSpacerItem使用该类可以创建自定义的间距，使用该类创建的间距相当于是一个空白部件，它是布局中的一个项目，会在布局中占据一个位置，布局会为其分配一个索引号</p>
+<p>QBoxLayout 及其子类(盒式布局)<br>QGridLayout 类(网格布局)<br>QFormLayout 类(表单布局)<br>该布局以两列的形式列出其子项目,左列是标签(label)部分，通常由标签 QLabel 组成，右列是由<br>字段(field)部分</p>
+<p>QSplitter 类继承自 QFrame 类，也就是说该类是一个带有边框的可视部件。<br>2、QSplitter 类实现分离器，分离器用于分离两个部件，用户可通过拖动部件之间的分界线来<br>调整子部件的大小</p>
+<h2 id="Qt-焦点系统"><a href="#Qt-焦点系统" class="headerlink" title="Qt 焦点系统"></a>Qt 焦点系统</h2><p>焦点顺序(或 tab 顺序)：按下 tab 时，焦点的移动顺序称为焦点顺序或 tab 顺序</p>
+<p>使用 setTabOrder 函数设置焦点链的顺序</p>
+<p>更多参考GUI完全参考手册</p>
+
+  
+  
+    
+    <div class='footer'>
       
-        <div>
-          <a class='readmore' href='/2020/03/13/%E5%BC%80%E5%8F%91/Linux/Makefile/'>
-            阅读全文
-          </a>
-        </div>
+      
+      
       
     </div>
   
+  
+    
 
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-03-09T00:00:00+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2022年3月9日</p>
+  </a>
 </div>
 
-          </div>
         
       
         
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow blur">
+          
   
-  
-  
-  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/QT/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>QT</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
     
-    <h2 class="article-title" >
-      <a href="/2020/03/13/%E5%BC%80%E5%8F%91/Linux/Shell%E7%AC%94%E8%AE%B0/">
-        linux Shell
-      </a>
-    </h2>
-  
-  <div class='md'>
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://charyun.github.io/2022/03/09/%E5%BC%80%E5%8F%91/QT/QtPushButtonGroup/&title=Qt部分控件和布局的介绍 - CHARY | 哈哈哈哈哈&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
     
-      <p><strong>linux Shell编程</strong></p>
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://charyun.github.io/2022/03/09/%E5%BC%80%E5%8F%91/QT/QtPushButtonGroup/&title=Qt部分控件和布局的介绍 - CHARY | 哈哈哈哈哈&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://charyun.github.io/2022/03/09/%E5%BC%80%E5%8F%91/QT/QtPushButtonGroup/&title=Qt部分控件和布局的介绍 - CHARY | 哈哈哈哈哈&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+    
+      
     
   </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
+</div>
+
+
+
         
-        <time>2020-03-13</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a><span class="sep"></span><a class="category-link" href="/categories/%E5%BC%80%E5%8F%91/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/">Linux系统编程</a>
-        
-      </div>
       
-        <div>
-          <a class='readmore' href='/2020/03/13/%E5%BC%80%E5%8F%91/Linux/Shell%E7%AC%94%E8%AE%B0/'>
-            阅读全文
-          </a>
-        </div>
+    </div>
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+      
+        <a class='next' href='/2022/03/09/%E5%BC%80%E5%8F%91/%E5%85%B6%E5%AE%83/git%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95/'>
+          <p class='title'>git的常见使用方法<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>
+
+常用命令设置用户名和邮箱
+项目级别：12git config user.name &quot;name&quot;git config user.email &quot;email&quot...</p>
+        </a>
       
     </div>
   
+</article>
 
-</div>
 
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow blur">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/02/27/%E5%BC%80%E5%8F%91/C++/Window%E4%B8%8A%E5%9F%BA%E4%BA%8EQT%E7%9A%84FFmpeg%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
-        Window上基于QT的FFmpeg环境搭建
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      <p>Window上基于QT的FFmpeg环境搭建</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2020-02-27</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a><span class="sep"></span><a class="category-link" href="/categories/%E5%BC%80%E5%8F%91/QT/">QT</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/02/27/%E5%BC%80%E5%8F%91/C++/Window%E4%B8%8A%E5%9F%BA%E4%BA%8EQT%E7%9A%84FFmpeg%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
   
 
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow blur">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/01/19/%E5%BC%80%E5%8F%91/C++/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">
-        LeetCode刷题记录(简单篇一)
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      <p>——持续更新中（15道题）…<br>题目来源：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/"><em>力扣（LeetCode）</em></a></p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2020-01-19</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a><span class="sep"></span><a class="category-link" href="/categories/%E5%BC%80%E5%8F%91/%E5%88%B7%E9%A2%98/">刷题</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/01/19/%E5%BC%80%E5%8F%91/C++/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow blur">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/01/18/%E5%BC%80%E5%8F%91/Linux/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
-        面试题收录
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      <p><strong>面试题整理收录</strong>——软件工程师面试题收录，持续更新中…</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2020-01-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a><span class="sep"></span><a class="category-link" href="/categories/%E5%BC%80%E5%8F%91/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/">Linux系统编程</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/01/18/%E5%BC%80%E5%8F%91/Linux/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow blur">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/01/16/%E5%BC%80%E5%8F%91/C++/C++/">
-        顺序容器
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      <p><strong>C++中的顺序容器操作</strong></p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2020-01-16</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a><span class="sep"></span><a class="category-link" href="/categories/%E5%BC%80%E5%8F%91/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/01/16/%E5%BC%80%E5%8F%91/C++/C++/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow blur">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/01/16/%E5%BC%80%E5%8F%91/Linux/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/">
-        Linux进程间通信
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      <!-- **Linux进程间通信** -->
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2020-01-16</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a><span class="sep"></span><a class="category-link" href="/categories/%E5%BC%80%E5%8F%91/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/">Linux系统编程</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/01/16/%E5%BC%80%E5%8F%91/Linux/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-    
-  </section>
-  
-    
-      <br>
-      <div class="prev-next">
-        
-          <a class="prev" rel="prev" href="/archives/2020/">
-            <section class="post prev white-box shadow blur" >
-              <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页&nbsp;
-            </section>
-          </a>
-        
-        <p class="current">
-          2 / 2
-        </p>
-        
-      </div>
-    
   
 
 
-	
+
+
+
+
 </div>
 <aside class='l_side'>
   
   
-    
-    
-
-<section class="widget blogger blur desktop mobile">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='/about/'>
-          <img no-lazy src='/assets/logo/xiaote_logo.jpeg'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-        
-          <p><span id="jinrishici-sentence">CHARY | 哈哈哈哈哈</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="mailto:chaiyun321@163.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/Charyun"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://music.163.com/#/user/home?id=122961877"
-              class="social fas fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
 
   
 
   
     
     
-  
 
-  <section class="widget category blur desktop">
+
+
+  <section class="widget toc-wrapper blur desktop mobile" id="toc-div" >
     
   <header>
     
-      <a href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
 
 
     <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/Blog%E6%90%AD%E5%BB%BA/" href="/categories/Blog%E6%90%AD%E5%BB%BA/"
-            id="categoriesBlogE690ADE5BBBA"
-            ><div class='name'>Blog搭建</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/C/" href="/categories/C/"
-            id="categoriesC"
-            ><div class='name'>C++</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/C/CUDA/" href="/categories/C/CUDA/"
-            id="categoriesCCUDA"
-            ><div class='name'>CUDA</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Deeplearning/" href="/categories/Deeplearning/"
-            id="categoriesDeeplearning"
-            ><div class='name'>Deeplearning</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/Deeplearning/Pytorch/" href="/categories/Deeplearning/Pytorch/"
-            id="categoriesDeeplearningPytorch"
-            ><div class='name'>Pytorch</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%85%B6%E5%AE%83/" href="/categories/%E5%85%B6%E5%AE%83/"
-            id="categoriesE585B6E5AE83"
-            ><div class='name'>其它</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/%E5%85%B6%E5%AE%83/Assim/" href="/categories/%E5%85%B6%E5%AE%83/Assim/"
-            id="categoriesE585B6E5AE83Assim"
-            ><div class='name'>Assim</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%BC%80%E5%8F%91/" href="/categories/%E5%BC%80%E5%8F%91/"
-            id="categoriesE5BC80E58F91"
-            ><div class='name'>开发</div><div class='badge'>(17)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/%E5%BC%80%E5%8F%91/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/" href="/categories/%E5%BC%80%E5%8F%91/Linux%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/"
-            id="categoriesE5BC80E58F91LinuxE7B3BBE7BB9FE7BC96E7A88B"
-            ><div class='name'>Linux系统编程</div><div class='badge'>(5)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/%E5%BC%80%E5%8F%91/QT/" href="/categories/%E5%BC%80%E5%8F%91/QT/"
-            id="categoriesE5BC80E58F91QT"
-            ><div class='name'>QT</div><div class='badge'>(7)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/%E5%BC%80%E5%8F%91/%E5%88%B7%E9%A2%98/" href="/categories/%E5%BC%80%E5%8F%91/%E5%88%B7%E9%A2%98/"
-            id="categoriesE5BC80E58F91E588B7E9A298"
-            ><div class='name'>刷题</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/%E5%BC%80%E5%8F%91/%E6%A0%87%E5%87%86%E5%BA%93/" href="/categories/%E5%BC%80%E5%8F%91/%E6%A0%87%E5%87%86%E5%BA%93/"
-            id="categoriesE5BC80E58F91E6A087E58786E5BA93"
-            ><div class='name'>标准库</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/%E5%BC%80%E5%8F%91/%E7%AE%97%E6%B3%95/" href="/categories/%E5%BC%80%E5%8F%91/%E7%AE%97%E6%B3%95/"
-            id="categoriesE5BC80E58F91E7AE97E6B395"
-            ><div class='name'>算法</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%BC%80%E5%8F%91%EF%BC%8CQT/" href="/categories/%E5%BC%80%E5%8F%91%EF%BC%8CQT/"
-            id="categoriesE5BC80E58F91EFBC8CQT"
-            ><div class='name'>开发，QT</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E7%90%86%E8%B4%A2/" href="/categories/%E7%90%86%E8%B4%A2/"
-            id="categoriesE79086E8B4A2"
-            ><div class='name'>理财</div><div class='badge'>(1)</div></a></li>
-        
-      </ul>
-    </div>
-  </section>
-
-
-  
-
-  
-    
-    
-  
-
-  <section class="widget tagcloud blur desktop mobile">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/tags/C/" style="font-size: 24px; color: #555">C++</a> <a href="/tags/CUDA/" style="font-size: 14px; color: #999">CUDA</a> <a href="/tags/QT/" style="font-size: 21.5px; color: #666">QT</a> <a href="/tags/c/" style="font-size: 16.5px; color: #888">c++</a> <a href="/tags/ffmpeg/" style="font-size: 14px; color: #999">ffmpeg</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/linux/" style="font-size: 14px; color: #999">linux</a> <a href="/tags/pytorch/" style="font-size: 19px; color: #777">pytorch</a> <a href="/tags/qt/" style="font-size: 14px; color: #999">qt</a> <a href="/tags/%E5%BA%93/" style="font-size: 14px; color: #999">库</a> <a href="/tags/%E7%90%86%E8%B4%A2/" style="font-size: 14px; color: #999">理财</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 16.5px; color: #888">面试</a>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E9%83%A8%E4%BB%B6"><span class="toc-text">容器部件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#QDialogButtonBox"><span class="toc-text">QDialogButtonBox</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#QGroupBox"><span class="toc-text">QGroupBox</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#QLabel"><span class="toc-text">QLabel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%83%E5%B1%80%E7%AE%A1%E7%90%86%E5%99%A8"><span class="toc-text">布局管理器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%83%A8%E4%BB%B6%E6%8B%89%E4%BC%B8-Stretch-%E5%8E%9F%E7%90%86%E5%8F%8A%E5%A4%A7%E5%B0%8F%E7%AD%96%E7%95%A5"><span class="toc-text">部件拉伸(Stretch)原理及大小策略</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AE%B9%E8%BE%B9%E8%B7%9D-ContentsMargins-%E3%80%81%E9%97%B4%E8%B7%9D-spacing-%E5%92%8C-QSpacerItem-%E7%B1%BB"><span class="toc-text">内容边距(ContentsMargins)、间距(spacing)和 QSpacerItem 类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Qt-%E7%84%A6%E7%82%B9%E7%B3%BB%E7%BB%9F"><span class="toc-text">Qt 焦点系统</span></a></li></ol>
     </div>
   </section>
 
@@ -1008,27 +759,28 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </aside>
 
 
+
 		  
 		  <!--此文件用来存放一些不方便取值的变量-->
 <!--思路大概是将值藏到重加载的区域内-->
 
 <script>
   window.pdata={}
-  pdata.ispage=false;
-  pdata.postTitle="";
+  pdata.ispage=true;
+  pdata.postTitle="Qt部分控件和布局的介绍";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要
   var l_header=document.getElementById("l_header");
   
-  l_header.classList.add("show");
+  l_header.classList.remove("show");
   
   
     // cover
     var cover_wrapper=document.querySelector('.cover-wrapper');
     
-    cover_wrapper.id="none";
-    cover_wrapper.style.display="none";
+    cover_wrapper.id="half";
+    cover_wrapper.style.display="";
     
   
 </script>
